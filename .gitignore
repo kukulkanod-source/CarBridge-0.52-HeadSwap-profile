@@ -1,0 +1,11 @@
+.gradle/
+**/build/
+local.properties
+.local-maven-root
+*.keystore
+*.jks
+.idea/
+*.iml
+
+*.apk
+*.zip

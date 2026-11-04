@@ -1,0 +1,32 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+    <application android:label="CarBridge · HeadSwap" android:theme="@style/CarBridgeTheme"
+        android:icon="@drawable/profile_icon" android:allowBackup="false" android:supportsRtl="true">
+        <activity android:name=".ProfileActivity" android:exported="true" android:resizeableActivity="true"
+            android:launchMode="standard" android:label="CarBridge 0.52" android:configChanges="screenSize|smallestScreenSize|orientation|density">
+            <intent-filter>
+                <action android:name="com.headswap.desk.action.DESKTOP_COMPONENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data android:name="com.headswap.desk.component.API_MAJOR" android:value="1" />
+            <meta-data android:name="com.headswap.desk.component.PROFILE" android:value="android-desktop" />
+            <meta-data android:name="com.headswap.desk.component.MODE_ID" android:value="carbridge" />
+            <meta-data android:name="com.headswap.desk.component.DASHBOARD" android:value="true" />
+            <meta-data android:name="com.headswap.desk.component.PROFILE_CHROME" android:value="true" />
+        </activity>
+        <service android:name=".ProfileNotifications" android:label="Уведомления CarBridge"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" android:exported="true">
+            <intent-filter><action android:name="android.service.notification.NotificationListenerService" /></intent-filter>
+        </service>
+    </application>
+</manifest>

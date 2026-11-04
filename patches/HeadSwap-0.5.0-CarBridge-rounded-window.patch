@@ -1,0 +1,30 @@
+--- a/android/app/src/main/java/com/headswap/desk/desktop/AndroidDesktopActivity.kt
++++ b/android/app/src/main/java/com/headswap/desk/desktop/AndroidDesktopActivity.kt
+@@ -586,6 +586,8 @@
+     private fun leaveDashboard() {
+         targetGuidance.show(false)
+         dashboard = false
++        appsWindow.clipToOutline = false
++        appsWindow.setBackgroundColor(Color.BLACK)
+         profileExposed = false
+         confirmMove?.dismiss()
+         phoneConfirmation?.dismiss()
+@@ -601,6 +603,18 @@
+     // second real task over just the map rectangle. Changing Z order keeps both leases alive.
+     private fun layoutDashboard() {
+         if (!dashboard) return
++        // The host owns the TextureView containing the target app; a profile cannot clip it.
++        // Match CarBridge's 18dp chrome without changing other desktop profiles or task input.
++        val roundedCarBridge = panelChoice?.modeId == "carbridge"
++        if (roundedCarBridge) {
++            appsWindow.background = GradientDrawable().apply {
++                setColor(Color.BLACK)
++                cornerRadius = dp(18).toFloat()
++            }
++        } else {
++            appsWindow.setBackgroundColor(Color.BLACK)
++        }
++        appsWindow.clipToOutline = roundedCarBridge
+         if (!targetVisible) targetGuidance.show(false)
+         val width = workspace.width
+         val height = workspace.height
